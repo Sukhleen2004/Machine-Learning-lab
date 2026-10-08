@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "c1f2e831-2f00-4f51-b010-student-api",
+		"name": "Student API - 20 Test Cases Suite",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TC01 - Get All Students",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		},
+		{
+			"name": "TC02 - Get Student By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students/1",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students", "1"]
+				}
+			}
+		},
+		{
+			"name": "TC03 - Get Non Existent Student",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students/999",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students", "999"]
+				}
+			}
+		},
+		{
+			"name": "TC04 - Filter Students By Course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students?course=Computer Science",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"],
+					"query": [{"key": "course", "value": "Computer Science"}]
+				}
+			}
+		},
+		{
+			"name": "TC05 - Filter By Non Existent Course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students?course=Astronomy",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"],
+					"query": [{"key": "course", "value": "Astronomy"}]
+				}
+			}
+		},
+		{
+			"name": "TC06 - Create Student Success",
+			"request": {
+				"method": "POST",
+				"header": [
+					{"key": "Authorization", "value": "Bearer valid-token"},
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Rohan Mehta\",\n  \"email\": \"rohan@example.com\",\n  \"course\": \"Mechanical Engineering\",\n  \"gpa\": 3.6\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		},
+		{
+			"name": "TC07 - Create Student Without Token",
+			"request": {
+				"method": "POST",
+				"header": [{"key": "Content-Type", "value": "application/json"}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Rohan Mehta\",\n  \"email\": \"rohan2@example.com\",\n  \"course\": \"Mechanical\",\n  \"gpa\": 3.6\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		},
+		{
+			"name": "TC08 - Create Student Invalid Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{"key": "Authorization", "value": "Bearer wrong-token"},
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Rohan Mehta\",\n  \"email\": \"rohan3@example.com\",\n  \"course\": \"Mechanical\",\n  \"gpa\": 3.6\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		},
+		{
+			"name": "TC09 - Create Student Missing Field",
+			"request": {
+				"method": "POST",
+				"header": [
+					{"key": "Authorization", "value": "Bearer valid-token"},
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Rohan Mehta\",\n  \"course\": \"Mechanical\",\n  \"gpa\": 3.6\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		},
+		{
+			"name": "TC10 - Create Student Invalid JSON",
+			"request": {
+				"method": "POST",
+				"header": [
+					{"key": "Authorization", "value": "Bearer valid-token"},
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Rohan Mehta\",\n  \"email\": \"badjson@example.com\"\n"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		},
+		{
+			"name": "TC11 - Create Student Duplicate Email",
+			"request": {
+				"method": "POST",
+				"header": [
+					{"key": "Authorization", "value": "Bearer valid-token"},
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Duplicate Check\",\n  \"email\": \"aarav@example.com\",\n  \"course\": \"Computer Science\",\n  \"gpa\": 3.5\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		},
+		{
+			"name": "TC12 - Create Student Invalid GPA High",
+			"request": {
+				"method": "POST",
+				"header": [
+					{"key": "Authorization", "value": "Bearer valid-token"},
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Invalid GPA\",\n  \"email\": \"invalidgpa@example.com\",\n  \"course\": \"Math\",\n  \"gpa\": 5.0\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		},
+		{
+			"name": "TC13 - Create Student Boundary GPA Zero",
+			"request": {
+				"method": "POST",
+				"header": [
+					{"key": "Authorization", "value": "Bearer valid-token"},
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Min GPA Student\",\n  \"email\": \"mingpa@example.com\",\n  \"course\": \"Arts\",\n  \"gpa\": 0.0\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		},
+		{
+			"name": "TC14 - Update Student Success",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{"key": "Authorization", "value": "Bearer valid-token"},
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"gpa\": 3.9\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students/1",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students", "1"]
+				}
+			}
+		},
+		{
+			"name": "TC15 - Update Non Existent Student",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{"key": "Authorization", "value": "Bearer valid-token"},
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Unknown\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students/999",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students", "999"]
+				}
+			}
+		},
+		{
+			"name": "TC16 - Update Student Without Auth",
+			"request": {
+				"method": "PUT",
+				"header": [{"key": "Content-Type", "value": "application/json"}],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Unauthorized Update\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students/1",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students", "1"]
+				}
+			}
+		},
+		{
+			"name": "TC17 - Delete Student Success",
+			"request": {
+				"method": "DELETE",
+				"header": [{"key": "Authorization", "value": "Bearer valid-token"}],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students/2",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students", "2"]
+				}
+			}
+		},
+		{
+			"name": "TC18 - Delete Student Without Auth",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students/1",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students", "1"]
+				}
+			}
+		},
+		{
+			"name": "TC19 - Delete Non Existent Student",
+			"request": {
+				"method": "DELETE",
+				"header": [{"key": "Authorization", "value": "Bearer valid-token"}],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students/999",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students", "999"]
+				}
+			}
+		},
+		{
+			"name": "TC20 - Unsupported HTTP Method",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/students",
+					"protocol": "http",
+					"host": ["127", "0", "0", "1"],
+					"port": "5000",
+					"path": ["api", "v1", "students"]
+				}
+			}
+		}
+	]
+}
